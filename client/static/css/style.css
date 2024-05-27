@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+header {
+    height: 50px;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 20px;
+    color: white;
+}
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#book-list {
+    
+}
+footer {
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: darkgray;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
