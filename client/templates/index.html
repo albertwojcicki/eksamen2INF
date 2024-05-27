@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-Hello world
-
+<h1>Book Collection</h1>
+<div id="book-list">
+    {% for book in data %}
+        <div>{{ book.bok_tittel }} by {{ book.bok_forfatter }}</div>
+    {% endfor %}
+</div>
 {% endblock %}

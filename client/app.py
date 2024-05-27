@@ -8,7 +8,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    data = requests.get("http://127.0.0.1:5020/").json()
+    print(data)
+    return render_template("index.html", data = data)
 
 
 

@@ -8,13 +8,26 @@ app = Flask(__name__)
 con = sqlite3.connect("database.db", check_same_thread=False)
 cur = con.cursor()
 
-
 @app.route("/")
 def index():
-    cur.execute("SELECT * FROM bøker")
-    response = cur.fetchall()
-    return jsonify(response)
-
+    try:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM bøker")
+        response = cur.fetchall()
+        books = []
+        for row in response:
+            book = {
+                "bok_id": row[0],
+                "bok_tittel": row[1],
+                "bok_forfatter": row[2],
+                "bok_nummer": row[3],
+                "bok_isbn": row[4]
+            }
+            books.append(book)
+        return jsonify(books)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 @app.route("/bok/<int:bok_nummer>")
 def bok(bok_nummer):
     cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
