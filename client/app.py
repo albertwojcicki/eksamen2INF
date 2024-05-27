@@ -32,5 +32,24 @@ def slettbok(bok_nummer):
     response = requests.delete(f"http://127.0.0.1:5020/slettbok/{bok_nummer}").json()
     return redirect(url_for("index",response = response ))
 
+@app.route("/leggtilbok", methods = ["POST"])
+def leggtilbok():
+    bok_tittel = request.form.get("bok_tittel")
+    bok_forfatter = request.form.get("bok_forfatter")
+    bok_nummer = request.form.get("bok_nummer")
+    bok_isbn = request.form.get("bok_isbn")
+    data = {
+        "bok_tittel": bok_tittel,
+        "bok_forfatter": bok_forfatter,
+        "bok_nummer": bok_nummer,
+        "bok_isbn": bok_isbn
+    }
+    response = requests.post("http://127.0.0.1:5020/leggtilbok", json=data).json()
+    return render_template("legg_til_bok.html", response = response)
+
+@app.route("/leggtilbok_side")
+def leggtilbok_side():
+    return render_template("legg_til_bok.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

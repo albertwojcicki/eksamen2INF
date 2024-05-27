@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 <body>
+    <div class="wrapper">
     <header>
-        <h2>Bibliotek API</h2>
+        <h2><a href="/">Bibliotek API</a></h2>
+        <h4><a href="/leggtilbok_side">Legg til bok</a></h4>
     </header>
-
+<div class="content">
 <article>
     {% block content %}
     {% endblock %}
-</article>
+</article></div>
 
     <footer>
 <p>Laget av Albert</p>
-    </footer>
+    </footer></div>
 </body>
 </html>

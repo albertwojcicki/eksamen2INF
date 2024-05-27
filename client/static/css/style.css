@@ -57,6 +57,16 @@ article {
     margin: 5px 0;
 }
 
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
 footer {
     height: 75px;
     display: flex;
@@ -64,7 +74,19 @@ footer {
     align-items: center;
     color: white;
     background-color: darkgray;
-    bottom: 0;
-    position: absolute;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    padding-left: 20px;
+}
+
+.div-leggtilbok-form {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
     width: 100%;
+    align-items: center;
+    padding-top: 20px;
 }
