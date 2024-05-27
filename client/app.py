@@ -9,27 +9,27 @@ app = Flask(__name__)
 def index():
     query = request.form.get("filter_streng")
     if query:
-        response = requests.get(f"http://127.0.0.1:5020/filter/{query}")
+        response = requests.get(f"http://192.168.1.146/filter/{query}")
     else:
-        response = requests.get("http://127.0.0.1:5020/")
+        response = requests.get("http://192.168.1.146/")
     books = response.json()
     return render_template("index.html", data=books)
 
 @app.route("/bok/<int:bok_nummer>", methods=["POST", "GET"])
 def bok(bok_nummer):
-    response = requests.get(f"http://127.0.0.1:5020/bok/{bok_nummer}").json()
+    response = requests.get(f"http://192.168.1.146/bok/{bok_nummer}").json()
     return render_template("bok.html", data=response)
 
 @app.route("/filter", methods = ["POST"])
 def filter():
     filter_streng = request.form.get("filter_streng")
-    response = requests.get(f"http://127.0.0.1:5020/filter/{filter_streng}").json()
+    response = requests.get(f"http://192.168.1.146/filter/{filter_streng}").json()
     print(response)
     return render_template("index.html", data = response)
 
 @app.route("/slettbok/<int:bok_nummer>", methods = ["POST"])
 def slettbok(bok_nummer):
-    response = requests.delete(f"http://127.0.0.1:5020/slettbok/{bok_nummer}").json()
+    response = requests.delete(f"http://192.168.1.146/slettbok/{bok_nummer}").json()
     return redirect(url_for("index",response = response ))
 
 @app.route("/leggtilbok", methods = ["POST"])
@@ -44,7 +44,7 @@ def leggtilbok():
         "bok_nummer": bok_nummer,
         "bok_isbn": bok_isbn
     }
-    response = requests.post("http://127.0.0.1:5020/leggtilbok", json=data).json()
+    response = requests.post("http://192.168.1.146/leggtilbok", json=data).json()
     return render_template("legg_til_bok.html", response = response)
 
 @app.route("/leggtilbok_side")

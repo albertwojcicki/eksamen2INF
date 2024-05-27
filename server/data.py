@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("database.db", check_same_thread=False)
+con = sqlite3.connect("/var/www/html/database.db", check_same_thread=False)
 cur = con.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS bøker (
