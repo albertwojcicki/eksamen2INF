@@ -44,13 +44,17 @@ def leggtilbok():
     bok_forfatter = data["bok_forfatter"]
     bok_nummer = data["bok_nummer"]
     bok_isbn = data["bok_isbn"]
-    cur = con.cursor()
-    cur.execute("INSERT INTO bøker (bok_tittel, bok_forfatter, bok_nummer, bok_isbn) VALUES (?, ?, ?, ?)", (bok_tittel, bok_forfatter, bok_nummer, bok_isbn))
-    con.commit()
-    con.close()
-    suksessfull_melding = f"{bok_tittel} ble registrert"
-    return jsonify({"resultat": suksessfull_melding})
+    cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
+    existing_book = cur.fetchone()
+    if existing_book:
+        return jsonify({"resultat": f"Boken finnes fra før"}), 400
 
+    cur.execute("INSERT INTO bøker (bok_tittel, bok_forfatter, bok_nummer, bok_isbn) VALUES (?, ?, ?, ?)",
+                (bok_tittel, bok_forfatter, bok_nummer, bok_isbn))
+    con.commit()
+
+    suksessfull_melding = f"{bok_tittel} ble registrert"
+    return jsonify({"resultat": suksessfull_melding}), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
