@@ -49,6 +49,8 @@ def bok(bok_nummer):
 def filter(filter_streng):
     cur.execute("SELECT * FROM bøker WHERE LOWER(bok_tittel) = LOWER(?) OR LOWER(bok_forfatter) = LOWER(?)", (filter_streng, filter_streng))
     response = cur.fetchall()
+    if not response:  # Check if the response list is empty
+        return jsonify({"error": "Ingen bøker med denne tittelen/ forfatteren"}), 404
     books = []
     for row in response:
         book = {
