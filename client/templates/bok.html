@@ -6,5 +6,6 @@
 <p>Skrevet av: {{ book.bok_forfatter }}</p>
 <p>ISBN: {{ book.bok_isbn }}</p>
 <p>Bok nummer: {{ book.bok_nummer }}</p>
+<img src="http://127.0.0.1:5020/static/barcode/{{ book.bok_nummer }}.png" alt="Barcode for {{ book.bok_tittel }}" class="img-barcode">
 {% endfor %}
 {% endblock %}

@@ -43,13 +43,25 @@ def bok(bok_nummer):
         }
         books.append(book)
     return jsonify(books)
-   
 
-@app.route("/filter/<streng>", methods = ["GET"])
-def filter(streng):
-    cur.execute("SELECT * FROM bøker WHERE LOWER(bok_tittel) = LOWER(?) OR LOWER(bok_forfatter) = LOWER(?)", (streng, streng))
+
+@app.route("/filter/<filter_streng>", methods = ["GET"])
+def filter(filter_streng):
+    cur.execute("SELECT * FROM bøker WHERE LOWER(bok_tittel) = LOWER(?) OR LOWER(bok_forfatter) = LOWER(?)", (filter_streng, filter_streng))
     response = cur.fetchall()
-    return jsonify(response)
+    books = []
+    for row in response:
+        book = {
+            "bok_id": row[0],
+            "bok_tittel": row[1],
+            "bok_forfatter": row[2],
+            "bok_nummer": row[3],
+            "bok_isbn": row[4]
+        }
+        books.append(book)
+    return jsonify(books)
+
+ 
 
 @app.route("/slettbok/<int:bok_nummer>", methods=["DELETE"])
 def slettbok(bok_nummer):

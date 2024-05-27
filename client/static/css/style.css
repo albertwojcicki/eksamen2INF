@@ -33,7 +33,13 @@ article {
     gap: 20px;
     justify-content: center;
 }
+.img-barcode {
+    width: 150px;
+}
 
+.div-forms {
+    display: flex;
+}
 .book-item {
     background-color: #f4f4f4;
     border: 1px solid #ddd;
