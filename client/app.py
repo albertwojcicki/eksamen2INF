@@ -27,5 +27,10 @@ def filter():
     print(response)
     return render_template("index.html", data = response)
 
+@app.route("/slettbok/<int:bok_nummer>", methods = ["POST"])
+def slettbok(bok_nummer):
+    response = requests.delete(f"http://127.0.0.1:5020/slettbok/{bok_nummer}").json()
+    return redirect(url_for("index",response = response ))
+
 if __name__ == "__main__":
     app.run(debug=True)

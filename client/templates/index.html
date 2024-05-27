@@ -3,7 +3,7 @@
 <h1>Bøker</h1>
 <div class="div-forms">
 <form action="{{ url_for('filter', filter_streng = filter_streng)}}" method="post">
-    <input type="text" name="filter_streng">
+    <input type="text" name="filter_streng" required>
     <input type="submit">
 </form>
 <form action="{{ url_for('index')}}">
@@ -11,7 +11,8 @@
 </form></div>
 <div id="book-list">
     {% for book in data %}
-    <form class="book-item" action="{{ url_for('bok', bok_nummer=book.bok_nummer) }}" method="post">
+    <div class="book-item">
+    <form  action="{{ url_for('bok', bok_nummer=book.bok_nummer) }}" method="post">
         <h2>{{ book.bok_tittel }}</h2>
         <p>Skrevet av: {{ book.bok_forfatter }}</p>
         <p>ISBN: {{ book.bok_isbn }}</p>
@@ -19,6 +20,10 @@
         <input type="hidden" name="bok_nummer" value="{{ book.bok_nummer }}">
         <button type="submit">Se boken</button>
     </form>
+    <form action="{{ url_for('slettbok', bok_nummer = book.bok_nummer )}}" method="post">
+        
+        <input type="submit" value="Slett bok">
+    </form></div>
     {% endfor %}
 </div>
 {% endblock %}
