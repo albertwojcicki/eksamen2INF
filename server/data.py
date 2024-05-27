@@ -10,3 +10,23 @@ cur.execute("""CREATE TABLE IF NOT EXISTS bøker (
                 bok_isbn INTEGER
             );""")
 con.commit()
+bøker = [
+    ("Skråpånatta", "Lars Mytting", 1, 9788205548387),
+    ("Skråpånatta", "Lars Mytting", 2, 9788205548387),
+    ("Skråpånatta", "Lars Mytting", 3, 9788205548387),
+    ("Atlas: Historien om Pa Salt", "Lucinda Riley", 4, 9788205548387),
+    ("Maskiner som tenker", "Inga Strümke", 5, 9788248926741),
+    ("Maskiner som tenker", "Inga Strümke", 6, 9788248926741),
+    ("Maskiner som tenker", "Inga Strümke", 7, 9788248926741),
+    ("Maskiner som tenker", "Inga Strümke", 8, 9788248926741),
+    ("Maskiner som tenker", "Inga Strümke", 9, 9788248926741),
+    ("Å vanne blomster om kvelden", "Valérie Perrin", 10, 9788205548387),
+    ("Å vanne blomster om kvelden", "Valérie Perrin", 11, 9788205548387),
+    ("Da vi var yngre", "Oliver Lovrenski", 12, 9788205548387),
+    ("Da vi var yngre", "Oliver Lovrenski", 13, 9788205548387),
+    ("Da vi var yngre", "Oliver Lovrenski", 14, 9788205548387)
+]
+
+
+cur.executemany("INSERT INTO bøker (bok_tittel, bok_forfatter, bok_nummer, bok_isbn) VALUES (?, ?, ?, ?)", bøker)
+con.commit()
