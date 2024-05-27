@@ -3,7 +3,14 @@
 <h1>Book Collection</h1>
 <div id="book-list">
     {% for book in data %}
-        <div>{{ book.bok_tittel }} by {{ book.bok_forfatter }}</div>
+    <form class="book-item" action="{{ url_for('bok', bok_nummer = book.bok_nummer) }}" method="post">
+        <h2>{{ book.bok_tittel }}</h2>
+        <p>Skrevet av: {{ book.bok_forfatter }}</p>
+        <p>ISBN: {{ book.bok_isbn }}</p>
+        <p>Bok nummer: {{ book.bok_nummer }}</p>
+        <input type="hidden" name="bok_nummer" value="{{ book.bok_nummer }}">
+        <button type="submit">Send Bok Nummer</button>
+    </form>
     {% endfor %}
 </div>
 {% endblock %}

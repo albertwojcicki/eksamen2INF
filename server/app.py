@@ -32,7 +32,18 @@ def index():
 def bok(bok_nummer):
     cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
     response = cur.fetchall()
-    return jsonify(response)
+    books = []
+    for row in response:
+        book = {
+            "bok_id": row[0],
+            "bok_tittel": row[1],
+            "bok_forfatter": row[2],
+            "bok_nummer": row[3],
+            "bok_isbn": row[4]
+        }
+        books.append(book)
+    return jsonify(books)
+   
 
 @app.route("/filter/<streng>", methods = ["GET"])
 def filter(streng):

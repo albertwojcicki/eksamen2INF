@@ -21,8 +21,36 @@ article {
 }
 
 #book-list {
-    
+    width: 100%;
+    display: flex;
+
 }
+
+#book-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.book-item {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    width: calc(33.333% - 40px); /* 3 items per row, adjust as needed */
+    box-sizing: border-box;
+}
+
+.book-item h2 {
+    margin-top: 0;
+}
+
+.book-item p {
+    margin: 5px 0;
+}
+
 footer {
     height: 75px;
     display: flex;

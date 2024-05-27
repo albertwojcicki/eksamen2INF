@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for book in data %}
+<h2>{{ book.bok_tittel }}</h2>
+<p>Skrevet av: {{ book.bok_forfatter }}</p>
+<p>ISBN: {{ book.bok_isbn }}</p>
+<p>Bok nummer: {{ book.bok_nummer }}</p>
+{% endfor %}
+{% endblock %}
