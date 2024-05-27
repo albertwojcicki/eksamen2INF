@@ -15,15 +15,15 @@ def index():
     response = cur.fetchall()
     return jsonify(response)
 
-@app.route("/bok/<bok_nummer")
+@app.route("/bok/<int:bok_nummer>")
 def bok(bok_nummer):
-    cur.execute("SELECT * FROM bøker WHERE bok_nummer = )", (bok_nummer,))
+    cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
     response = cur.fetchall()
     return jsonify(response)
 
-@app.route("/filter/<streng>")
+@app.route("/filter/<streng>", methods = ["GET"])
 def filter(streng):
-    cur.execute("SELECT * FROM bøker WHERE bok_tittel = ? OR bok_forfatter = ?", (streng,))
+    cur.execute("SELECT * FROM bøker WHERE LOWER(bok_tittel) = LOWER(?) OR LOWER(bok_forfatter) = LOWER(?)", (streng, streng))
     response = cur.fetchall()
     return jsonify(response)
 
@@ -57,4 +57,4 @@ def leggtilbok():
     return jsonify({"resultat": suksessfull_melding}), 201
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5020)
