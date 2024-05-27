@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% if data %}
 {% for book in data %}
 <h2>{{ book.bok_tittel }}</h2>
 <p>Skrevet av: {{ book.bok_forfatter }}</p>
@@ -11,5 +11,9 @@
         
     <input type="submit" value="Slett bok">
 </form>
+
+{% else %}
+<p>Denne boken finnes ikke</p>
 {% endfor %}
+{% endif %}
 {% endblock %}

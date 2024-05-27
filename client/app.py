@@ -15,7 +15,7 @@ def index():
     books = response.json()
     return render_template("index.html", data=books)
 
-@app.route("/bok/<int:bok_nummer>", methods=["POST"])
+@app.route("/bok/<int:bok_nummer>", methods=["POST", "GET"])
 def bok(bok_nummer):
     response = requests.get(f"http://127.0.0.1:5020/bok/{bok_nummer}").json()
     return render_template("bok.html", data=response)
@@ -50,6 +50,12 @@ def leggtilbok():
 @app.route("/leggtilbok_side")
 def leggtilbok_side():
     return render_template("legg_til_bok.html")
+
+@app.route("/søk_barcode", methods = ["GET"])
+def søk_barcode():
+    barcode = request.args.get("barcode")
+    print(barcode)
+    return redirect(url_for("bok", bok_nummer = int(barcode)))
 
 if __name__ == "__main__":
     app.run(debug=True)

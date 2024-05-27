@@ -94,5 +94,6 @@ def leggtilbok():
     suksessfull_melding = f"{bok_tittel} ble registrert"
     return jsonify({"resultat": suksessfull_melding}), 201
 
+
 if __name__ == "__main__":
     app.run(debug=True, port=5020)
