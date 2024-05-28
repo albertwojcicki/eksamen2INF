@@ -2,8 +2,8 @@
 {% block content %}
 <h1>Bøker</h1>
 <div class="div-forms">
-    <form action="{{ url_for('index') }}" method="post">
-        <input type="text" name="filter_streng" required>
+    <form action="{{ url_for('index', filter_streng = filter_streng) }}" method="post">
+        <input type="text" name="filter_streng" required value="{{ filter_streng }}">
         <input type="submit" value="Search">
     </form>
     <form action="{{ url_for('index') }}">
@@ -15,6 +15,11 @@
         <input type="submit" value="Search by Barcode">
     </form>
 </div>
+{% if error %}
+<div class="error-message">
+    <p>{{ error }}</p>
+</div>
+{% endif %}
 <div id="book-list">
     {% if data %}
         {% for book in data %}
