@@ -10,6 +10,10 @@
     <form action="{{ url_for('slettbok', bok_nummer=book.bok_nummer) }}" method="post">
         <input type="submit" value="Slett bok">
     </form>
+    <form action="{{ url_for('lån_bok', bok_nummer=book.bok_nummer) }}" method="post">
+        <input type="submit" value="Lån bok">
+    </form>
+    
 </div>
 {% else %}
 <div class="no-book-message">
