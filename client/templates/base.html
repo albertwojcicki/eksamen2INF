@@ -15,6 +15,7 @@
         <h6><a href="/leggtilbok_side"class="a-header">Legg til bok</a></h6>
         {% if bruker %}
         <h6 class="a-header">God morgen {{ bruker.brukernavn }}</h6>
+        <h6><a href="/loaned_books" class="a-header">Lånte bøker</a></h6>
         {% else %}
         <h6><a href="/logginn" class="a-header">Logg inn/Registrer bruker</a></h6>
         {% endif %}
