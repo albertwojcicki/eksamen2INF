@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="div-leggtilbok-form">
-<form action="{{ url_for('leggtilbok')}}" method="post">
-    <input type="text" name="bok_tittel" placeholder="Tittel" required>
-    <input type="text" name="bok_forfatter" placeholder="Forfatter" required>
-    <input type="number" name="bok_nummer" placeholder="Bok nummer" min="1" max="50" required>
-    <input type="number" name="bok_isbn" placeholder="ISBN" required>
-    <input type="submit">
-</form></div>
-{% if response: %}
-<p>{{response.resultat}}</p>
-{% endif %}
+    <h2>Legg til Bok</h2>
+    <form action="{{ url_for('leggtilbok')}}" method="post">
+        <input type="text" name="bok_tittel" placeholder="Tittel" required>
+        <input type="text" name="bok_forfatter" placeholder="Forfatter" required>
+        <input type="number" name="bok_nummer" placeholder="Bok nummer" min="1" max="50" required>
+        <input type="number" name="bok_isbn" placeholder="ISBN" required>
+        <input type="submit" value="Legg til Bok">
+    </form>
+    {% if response %}
+    <p>{{response.resultat}}</p>
+    {% endif %}
+</div>
 {% endblock %}
