@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Bøker</h1>
+
 <div class="div-forms">
-    <form action="{{ url_for('index', filter_streng = filter_streng) }}" method="post">
-        <input type="text" name="filter_streng" required value="{{ filter_streng }}">
+    <form action="{{ url_for('index') }}" method="post">
+        <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" required>
         <input type="submit" value="Search">
     </form>
     <form action="{{ url_for('index') }}">
-        <input type="submit" value="Reset">
+        <input type="submit" value="Reset" id="resetForm">
     </form>
     <form action="{{ url_for('søk_barcode') }}" method="get">
         <label for="number">Scan barkoden med scanneren</label>
@@ -41,4 +42,19 @@
     <h4>Ingen bøker med denne tittelen/forfatteren</h4>
     {% endif %}
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // If filter_streng is None or empty, clear the input field
+        var filterStreng = "{{ filter_streng }}";
+        if (filterStreng == "None") {
+            document.getElementById("filter_streng").value = "";
+        }
+        
+        // Handle the reset button click
+        document.getElementById("resetForm").addEventListener("submit", function() {
+            sessionStorage.removeItem("filter_streng"); // Clear the session storage
+            document.getElementById("filter_streng").value = ""; // Clear the input field
+        });
+    });
+</script>
 {% endblock %}
