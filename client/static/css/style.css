@@ -3,6 +3,15 @@
     margin: 0;
 }
 
+body {
+    background: url('https://images.unsplash.com/photo-1532012197267-da84d127e765') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    margin: 0;  
+}
 
 header {
     height: 50px;
@@ -12,14 +21,18 @@ header {
     justify-content: left;
     padding-left: 20px;
     color: white;
-}
-article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    margin-bottom: 20px;
+    z-index: 1;
 }
 
+article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
 
 #book-list {
     width: 100%;
@@ -28,15 +41,78 @@ article {
     gap: 20px;
     justify-content: center;
 }
+
 .img-barcode {
     width: 150px;
 }
+
 .a-her {
     color: black;
 }
+
 .div-forms {
     display: flex;
+    flex-direction: row; /* Changed to row for horizontal layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 50%; /* Use a percentage width for responsiveness */
+    max-width: 1200px; /* Max width for larger screens */
+    box-sizing: border-box;
+    margin-top: 2rem; /* Add some margin at the top */
+    gap: 1rem; /* Add gap between forms */
 }
+
+.div-forms form {
+    display: flex;
+    flex-direction: column; /* Keep inputs vertical within each form */
+    align-items: center; /* Center items within each form */
+    width: auto; /* Auto width for individual forms */
+    margin: 0 1rem; /* Horizontal margin between forms */
+}
+
+.div-forms input[type="text"],
+.div-forms input[type="number"],
+.div-forms input[type="submit"] {
+    margin-bottom: 0.5rem; /* Reduced margin for a tighter layout */
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem; /* Reduced padding for a tighter layout */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.div-forms input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.div-forms input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.div-forms label {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-align: center; /* Center align text */
+}
+
+.h1 {
+    color: white;
+}
+
 .book-item {
     background-color: #f4f4f4;
     border: 1px solid #ddd;
@@ -58,10 +134,12 @@ article {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .content {
     flex: 1;
+    width: 100%;
 }
 
 footer {
@@ -76,11 +154,17 @@ footer {
 a {
     color: white;
     text-decoration: none;
-    /* padding-left: 20px; */
+}
+.div-header-container {
+    display: flex;
+    align-items:center;
 }
 .a-header {
     padding-left: 20px;
+    color: white;
+    text-decoration: none;
 }
+
 .div-leggtilbok-form {
     display: flex;
     flex-direction: column;
@@ -88,4 +172,86 @@ a {
     width: 100%;
     align-items: center;
     padding-top: 20px;
+}
+
+.login-container h2 {
+    font-family: 'Georgia', serif;
+    margin-bottom: 1rem;
+}
+
+.login-container input[type="text"], 
+.login-container input[type="password"] {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.login-container input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+.h2-title {
+    color: white;
+}
+
+
+
+
+.div-leggtilbok-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    box-sizing: border-box;
+}
+
+.div-leggtilbok-form form {
+    width: 100%;
+}
+
+.div-leggtilbok-form input[type="text"],
+.div-leggtilbok-form input[type="number"],
+.div-leggtilbok-form input[type="submit"] {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.div-leggtilbok-form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem;
+    transition: background-color 0.3s ease;
+}
+
+.div-leggtilbok-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.div-leggtilbok-form h2 {
+    font-family: 'Georgia', serif;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
 }
