@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="div-overskrift">
 <h1 class="h1">Bøker</h1>
-
+</div>
 <div class="div-forms">
     <form action="{{ url_for('index') }}" method="post">
         <label for="number">Søk med tittel eller forfatternavn</label>
@@ -19,7 +20,7 @@
 </div>
 {% if error %}
 <div class="error-message">
-    <p>{{ error }}</p>
+    
 </div>
 {% endif %}
 <div id="book-list">

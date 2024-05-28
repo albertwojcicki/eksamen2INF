@@ -52,8 +52,7 @@ article {
 
 .div-forms {
     display: flex;
-    flex-direction: row; /* Changed to row for horizontal layout */
-    justify-content: center; /* Center horizontally */
+    justify-content: center; 
     align-items: center; /* Center vertically */
     background: rgba(255, 255, 255, 0.9);
     padding: 1rem;
@@ -67,12 +66,31 @@ article {
     gap: 1rem; /* Add gap between forms */
 }
 
+.div-overskrift {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center; 
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 13%; 
+    max-width: 1200px; 
+    box-sizing: border-box;
+    height: 60px;
+    color: black;
+    margin-top: 2rem; 
+    gap: 1rem; 
+}
+
 .div-forms form {
     display: flex;
-    flex-direction: column; /* Keep inputs vertical within each form */
-    align-items: center; /* Center items within each form */
-    width: auto; /* Auto width for individual forms */
-    margin: 0 1rem; /* Horizontal margin between forms */
+    flex-direction: column; 
+    align-items: center; 
+    width: auto; 
+    margin: 0 1rem; 
 }
 
 .div-forms input[type="text"],
@@ -110,7 +128,7 @@ article {
 }
 
 .h1 {
-    color: white !important;
+    color: black !important;
 }
 
 .book-item {

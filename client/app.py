@@ -16,10 +16,10 @@ def index():
         else:
             response = requests.get("http://127.0.0.1:5020/")
         
-        response.raise_for_status()  # Raise an exception for HTTP errors
+        response.raise_for_status() 
         books = response.json()
-        print("Books:", books)  # Debugging statement
-        if session["bruker"] != "":
+        print("Books:", books)  
+        if "bruker" in session and session["bruker"] != "":
             return render_template("index.html", data=books, filter_streng = query, bruker = session["bruker"])
         return render_template("index.html", data=books, filter_streng = query)
     except requests.exceptions.RequestException as e:

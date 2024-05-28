@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="login-container div-forms">
+<div class="login-container div-forms div-logginn-forms" style="flex-direction:column;">
     <h2>Logg inn</h2>
     <form action="{{ url_for('logginn')}}" method="post">
         <input type="text" name="brukernavn" class="form-control" placeholder="Brukernavn" required>
