@@ -255,3 +255,128 @@ a {
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
+
+#book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 2rem; /* Add some padding around the book list */
+}
+
+.book-item {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: calc(33.333% - 40px); /* 3 items per row with some spacing */
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-item h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.book-item p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    text-align: center;
+}
+
+.book-item form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-item form input[type="submit"], 
+.book-item form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.book-item form input[type="submit"]:hover, 
+.book-item form button:hover {
+    background-color: #0056b3;
+}
+
+
+.book-details {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 350px; /* Fixed width for the book details */
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem auto; /* Center align with auto margin */
+    text-align: center; /* Center align text */
+}
+
+.book-details h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-details p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+}
+
+.book-details img.img-barcode {
+    margin: 1rem 0;
+    width: 200px; /* Fixed width for barcode image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.book-details form {
+    width: 100%;
+}
+
+.book-details form input[type="submit"] {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-details form input[type="submit"]:hover {
+    background-color: #ff1a1a;
+}
+
+.no-book-message {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 350px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+}
