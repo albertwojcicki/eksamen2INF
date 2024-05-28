@@ -34,7 +34,21 @@ def loggetinn(func):
             return redirect("/logginn")
     return wrapper
 
-
+@app.route("/lån_bok/<int:bok_nummer>", methods=["POST"])
+def lån_bok(bok_nummer):
+    if "bruker" in session and session["bruker"]:
+        brukernavn = session["bruker"]["brukernavn"]
+        print(brukernavn)
+        try:
+            response = requests.post(f"http://127.0.0.1:5020/lån_bok/{bok_nummer}", json={"brukernavn": brukernavn})
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            print(f"Request failed: {e}")
+            return redirect(url_for("index", error="Failed to loan book."))
+        return redirect(url_for("index"))
+    else:
+        return redirect(url_for("logginn"))
+    
 @app.route("/bok/<int:bok_nummer>", methods=["POST", "GET"])
 def bok(bok_nummer):
     response = requests.get(f"http://127.0.0.1:5020/bok/{bok_nummer}").json()
