@@ -110,7 +110,7 @@ article {
 }
 
 .h1 {
-    color: white;
+    color: white !important;
 }
 
 .book-item {
@@ -217,6 +217,7 @@ a {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 350px;
+    height: 470px;
     box-sizing: border-box;
 }
 

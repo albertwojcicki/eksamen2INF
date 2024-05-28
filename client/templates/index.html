@@ -31,7 +31,6 @@
                 <h2>{{ book.bok_tittel }}</h2>
                 <p>Skrevet av: {{ book.bok_forfatter }}</p>
                 <p>ISBN: {{ book.bok_isbn }}</p>
-                <p>Bok nummer: {{ book.bok_nummer }}</p>
                 <input type="hidden" name="bok_nummer" value="{{ book.bok_nummer }}">
                 <button type="submit">Se boken</button>
             </form>
@@ -41,7 +40,8 @@
         </div>
         {% endfor %}
     {% else %}
-    <h4>Ingen bøker med denne tittelen/forfatteren</h4>
+    <div class="book-item">
+    <h4 >Ingen bøker med denne tittelen/forfatteren</h4></div>
     {% endif %}
 </div>
 <script>
