@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="login-container div-forms">
+<div class="login-container div-forms" style="flex-direction:column;">
     <h2>Registrer bruker</h2>
-    <form action="{{ url_for('registrer')}}" method="post">
+    <form action="{{ url_for('registrer')}}" method="post" >
         <input type="text" name="brukernavn" class="form-control" placeholder="Brukernavn" required>
         <input type="password" name="passord" class="form-control" placeholder="Passord" required>
         <input type="submit" class="btn btn-primary" value="Registrer">
