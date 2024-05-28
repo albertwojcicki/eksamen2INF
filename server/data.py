@@ -16,6 +16,14 @@ cur.execute("""CREATE TABLE IF NOT EXISTS brukere (
             passord TEXT
                 );""")
 con.commit()
+cur.execute("""CREATE TABLE IF NOT EXISTS lånte_bøker(
+            bruker_id INTEGER,
+            bok_nummer INTEGER,
+            lånt INTEGER,
+            dato_lånt TIMESTAMP, 
+            dato_levert TIMESTAMP
+            );""")
+con.commit()
 
 bøker = [
     ("Skråpånatta", "Lars Mytting", 1, 9788205548387),
