@@ -21,7 +21,8 @@ cur.execute("""CREATE TABLE IF NOT EXISTS lånte_bøker(
             bok_nummer INTEGER,
             lånt INTEGER,
             dato_lånt TIMESTAMP, 
-            dato_levert TIMESTAMP
+            dato_levert TIMESTAMP,
+            FOREIGN KEY (bruker_id) REFERENCES brukere(bruker_id)
             );""")
 con.commit()
 

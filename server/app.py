@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, json, url_
 import requests
 from flask_cors import CORS
 import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -28,7 +29,21 @@ def index():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-
+@app.route("/lån_bok/<int:bok_nummer>", methods=["POST"])
+def lån_bok(bok_nummer):
+    data = request.get_json()
+    brukernavn = data["brukernavn"]
+    cur.execute("SELECT bruker_id FROM brukere WHERE brukernavn = ?", (brukernavn,))
+    bruker = cur.fetchone()
+    if not bruker:
+        return jsonify({"error": "Bruker ikke funnet"}), 404
+    bruker_id = bruker[0]
+    dato_lånt = datetime.now()
+    cur.execute("INSERT INTO lånte_bøker (bruker_id, bok_nummer, lånt, dato_lånt) VALUES (?, ?, ?, ?)",
+                (bruker_id, bok_nummer, 1, dato_lånt))
+    con.commit()
+    return jsonify({"message": "Bok lånt suksessfullt"}), 200
+    
 @app.route("/bok/<int:bok_nummer>")
 def bok(bok_nummer):
     cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
