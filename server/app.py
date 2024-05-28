@@ -64,6 +64,8 @@ def filter(filter_streng):
         books.append(book)
     return jsonify(books)
 
+
+
 @app.route("/slettbok/<int:bok_nummer>", methods=["DELETE"])
 def slettbok(bok_nummer):
     cur.execute("DELETE FROM bøker WHERE bok_nummer = ?", (bok_nummer,))

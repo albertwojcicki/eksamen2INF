@@ -26,6 +26,15 @@ def index():
         print(f"Request failed: {e}")
         return render_template("index.html", error="Failed to retrieve books.")
     
+def loggetinn(func):
+    def wrapper(*args, **kwarg):
+        if session["bruker"]["brukernavn"] != "":
+            return func()
+        else:
+            return redirect("/logginn")
+    return wrapper
+
+
 @app.route("/bok/<int:bok_nummer>", methods=["POST", "GET"])
 def bok(bok_nummer):
     response = requests.get(f"http://127.0.0.1:5020/bok/{bok_nummer}").json()
@@ -94,6 +103,7 @@ def logginn():
             message = "feil brukernavn eller passord"
             return message
         
+
 
 @app.route("/registrer", methods = ["POST", "GET"])
 def registrer():
