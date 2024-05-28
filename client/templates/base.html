@@ -9,11 +9,17 @@
 <body>
     <div class="wrapper">
     <header>
-        <h2><a href="/">Bibliotek API</a></h2>
-        <h4><a href="/leggtilbok_side">Legg til bok</a></h4>
+        <h2><a href="/" class="a-header">Bibliotek API</a></h2>
+        <h4><a href="/leggtilbok_side"class="a-header">Legg til bok</a></h4>
+        {% if bruker %}
+        <h4 class="a-header">God morgen {{ bruker.brukernavn }}</h4>
+        {% else %}
+        <h4><a href="/logginn" class="a-header">Logg inn/Registrer bruker</a></h4>
+        {% endif %}
     </header>
 <div class="content">
 <article>
+    
     {% block content %}
     {% endblock %}
 </article></div>
@@ -21,5 +27,6 @@
     <footer>
 <p>Laget av Albert</p>
     </footer></div>
+
 </body>
 </html>

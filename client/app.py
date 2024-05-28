@@ -4,11 +4,12 @@ from flask_cors import CORS
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = "50605178899379788253018461"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     query = request.form.get("filter_streng")
-   
+    
     try:
         if query:
             response = requests.get(f"http://127.0.0.1:5020/filter/{query}")
@@ -18,6 +19,8 @@ def index():
         response.raise_for_status()  # Raise an exception for HTTP errors
         books = response.json()
         print("Books:", books)  # Debugging statement
+        if session["bruker"] != "":
+            return render_template("index.html", data=books, filter_streng = query, bruker = session["bruker"])
         return render_template("index.html", data=books, filter_streng = query)
     except requests.exceptions.RequestException as e:
         print(f"Request failed: {e}")
@@ -69,6 +72,44 @@ def søk_barcode():
     barcode = request.args.get("barcode")
     print(barcode)
     return redirect(url_for("bok", bok_nummer = int(barcode)))
+
+@app.route("/logginn", methods = ["POST", "GET"])
+def logginn():
+    if request.method == "GET":
+        return render_template("logginn.html")
+    if request.method == "POST":
+        brukernavn = request.form.get("brukernavn")
+        passord = request.form.get("passord")
+        data = {
+            "brukernavn": brukernavn,
+            "passord": passord
+        }
+        response = requests.post("http://127.0.0.1:5020/logginn", json=data)
+        if response.status_code == 200:
+            bruker = response.json()
+            print(bruker)
+            session["bruker"] = bruker
+            return redirect("/")
+        else:
+            message = "feil brukernavn eller passord"
+            return message
+        
+
+@app.route("/registrer", methods = ["POST", "GET"])
+def registrer():
+    if request.method == "GET":
+        return render_template("registrer.html")
+    if request.method == "POST":
+        brukernavn = request.form.get("brukernavn")
+        passord = request.form.get("passord")
+        data = {
+            "brukernavn": brukernavn,
+            "passord": passord
+        }
+        response = requests.post("http://127.0.0.1:5020/registrer", json=data)
+        if response.status_code == 200:
+            return render_template("logginn.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

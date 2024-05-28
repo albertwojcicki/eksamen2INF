@@ -20,11 +20,6 @@ article {
     width: 100%;
 }
 
-#book-list {
-    width: 100%;
-    display: flex;
-
-}
 
 #book-list {
     width: 100%;
@@ -36,7 +31,9 @@ article {
 .img-barcode {
     width: 150px;
 }
-
+.a-her {
+    color: black;
+}
 .div-forms {
     display: flex;
 }
@@ -79,9 +76,11 @@ footer {
 a {
     color: white;
     text-decoration: none;
+    /* padding-left: 20px; */
+}
+.a-header {
     padding-left: 20px;
 }
-
 .div-leggtilbok-form {
     display: flex;
     flex-direction: column;

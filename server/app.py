@@ -28,6 +28,7 @@ def index():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+
 @app.route("/bok/<int:bok_nummer>")
 def bok(bok_nummer):
     cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
@@ -92,6 +93,21 @@ def leggtilbok():
     suksessfull_melding = f"{bok_tittel} ble registrert"
     return jsonify({"resultat": suksessfull_melding}), 201
 
+@app.route("/registrer", methods = ["POST"])
+def registrer():
+    brukernavn = request.get_json()["brukernavn"]
+    passord = request.get_json()["passord"]
+    cur.execute("INSERT INTO brukere (brukernavn, passord) VALUES (?, ?)", (brukernavn, passord))
+    con.commit()
+    return {"melding": "Bruker ble registrert"}, 200
+
+@app.route("/logginn", methods = ["POST"])
+def logginn():
+    brukernavn = request.get_json()["brukernavn"]
+    passord = request.get_json()["passord"]
+    cur.execute("SELECT * FROM brukere WHERE brukernavn = ? AND passord = ?", (brukernavn, passord))
+    bruker = cur.fetchone()
+    return {"brukernavn": bruker[1], "id": bruker[0]}, 200
 
 if __name__ == "__main__":
     app.run(debug=True, port=5020)
