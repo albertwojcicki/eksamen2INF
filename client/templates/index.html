@@ -24,6 +24,7 @@
 {% endif %}
 <div id="book-list">
     {% if data %}
+    <div id="book-list">
         {% for book in data %}
         <div class="book-item">
             <form action="{{ url_for('bok', bok_nummer=book.bok_nummer) }}" method="post">
