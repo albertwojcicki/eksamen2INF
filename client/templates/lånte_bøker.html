@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="div-forms" style="flex-direction:column;">
+<h1>Lånte bøker</h1>
+{% if books %}
+    <ul>
+    {% for book in books %}
+        <li>{{ book.bok_tittel }} by {{ book.bok_forfatter }} - Loaned on: {{ book.dato_lånt }} {% if book.dato_levert %} - Returned on: {{ book.dato_levert }}{% endif %}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No books loaned.</p>
+{% endif %}
+</div>
+{% endblock %}
