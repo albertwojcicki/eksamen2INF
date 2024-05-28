@@ -10,13 +10,15 @@
 <body>
     <div class="wrapper">
     <header>
-        <h2><a href="/" class="a-header">Bibliotek API</a></h2>
-        <h4><a href="/leggtilbok_side"class="a-header">Legg til bok</a></h4>
+        <div class="div-header-container">
+        <h3><a href="/" class="a-header">Bibliotek API</a></h3>
+        <h6><a href="/leggtilbok_side"class="a-header">Legg til bok</a></h6>
         {% if bruker %}
-        <h4 class="a-header">God morgen {{ bruker.brukernavn }}</h4>
+        <h6 class="a-header">God morgen {{ bruker.brukernavn }}</h6>
         {% else %}
-        <h4><a href="/logginn" class="a-header">Logg inn/Registrer bruker</a></h4>
+        <h6><a href="/logginn" class="a-header">Logg inn/Registrer bruker</a></h6>
         {% endif %}
+    </div>
     </header>
 <div class="content">
 <article>
