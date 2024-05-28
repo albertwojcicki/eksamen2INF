@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Bøker</h1>
+<h1 class="h1">Bøker</h1>
 
 <div class="div-forms">
     <form action="{{ url_for('index') }}" method="post">
+        <label for="number">Søk med tittel eller forfatternavn</label>
         <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" required>
-        <input type="submit" value="Search">
+        <input type="submit" value="Søk">
     </form>
     <form action="{{ url_for('index') }}">
         <input type="submit" value="Reset" id="resetForm">
@@ -13,7 +14,7 @@
     <form action="{{ url_for('søk_barcode') }}" id="barcodeForm" method="get">
         <label for="number">Scan barkoden med scanneren</label>
         <input type="number" name="barcode" id="barcode" required>
-        <input type="submit" value="Search by Barcode" >
+        <input type="submit" value="Søk med kode" >
     </form>
 </div>
 {% if error %}
