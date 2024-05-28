@@ -18,7 +18,7 @@ def index():
         
         response.raise_for_status() 
         books = response.json()
-        print("Books:", books)  
+         
         if "bruker" in session and session["bruker"] != "":
             return render_template("index.html", data=books, filter_streng = query, bruker = session["bruker"])
         return render_template("index.html", data=books, filter_streng = query)
@@ -34,13 +34,13 @@ def loggetinn(func):
             return redirect("/logginn")
     return wrapper
 
-@app.route("/lån_bok/<int:bok_nummer>", methods=["POST"])
-def lån_bok(bok_nummer):
+@app.route("/loan_book/<int:bok_nummer>", methods=["POST"])
+def loan_book(bok_nummer):
     if "bruker" in session and session["bruker"]:
         brukernavn = session["bruker"]["brukernavn"]
-        print(brukernavn)
+        
         try:
-            response = requests.post(f"http://127.0.0.1:5020/lån_bok/{bok_nummer}", json={"brukernavn": brukernavn})
+            response = requests.post(f"http://127.0.0.1:5020/loan_book/{bok_nummer}", json={"brukernavn": brukernavn})
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {e}")
@@ -48,6 +48,22 @@ def lån_bok(bok_nummer):
         return redirect(url_for("index"))
     else:
         return redirect(url_for("logginn"))
+
+@app.route("/loaned_books", methods=["GET"])
+def loaned_books():
+    if "bruker" in session and session["bruker"]:
+        bruker_id = session["bruker"]["id"]
+        try:
+            response = requests.get(f"http://127.0.0.1:5020/loaned_books/{bruker_id}")
+            response.raise_for_status()
+            books = response.json()
+            return render_template("lånte_bøker.html", books=books)
+        except requests.exceptions.RequestException as e:
+            print(f"Request failed: {e}")
+            return render_template("lånte_bøker.html", error="Failed to retrieve loaned books.")
+    else:
+        return redirect(url_for("logginn"))
+
     
 @app.route("/bok/<int:bok_nummer>", methods=["POST", "GET"])
 def bok(bok_nummer):
