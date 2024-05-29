@@ -10,7 +10,7 @@
     <img src="http://127.0.0.1:5020/static/bilder/{{ user.nummer }}.jpg" alt="Barcode for {{ user.nummer }}" class="img-barcode">
     <form method="POST" action="{{ url_for('låntaker_detail', nummer=user.nummer) }}">
         <label for="book_barcode">Scan Book Barcode:</label>
-        <input type="text" id="book_barcode" name="book_barcode" required>
+        <input type="text" id="book_barcode" name="book_barcode" min="1" max="50" required>
         <button type="submit">Scan</button>
     </form>
 {% else %}
