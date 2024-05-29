@@ -29,11 +29,12 @@ def index():
 def loggetinn(func):
     def wrapper(*args, **kwarg):
         if session["bruker"]["brukernavn"] != "":
-            return func()
+            return func(*args, **kwarg)
         else:
             return redirect("/logginn")
     return wrapper
 
+@loggetinn
 @app.route("/loan_book/<int:bok_nummer>", methods=["POST"])
 def loan_book(bok_nummer):
     if "bruker" in session and session["bruker"]:
