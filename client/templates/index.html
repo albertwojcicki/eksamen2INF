@@ -17,7 +17,7 @@
     </form>
     <form method="POST" action="{{ url_for('scan_user') }}">
         <label for="barcode">User Barcode:</label>
-        <input type="text" id="barcode" name="barcode" required>
+        <input type="number" id="barcode" name="barcode" min="1000" max="1020" required>
         <button type="submit">Scan</button>
     </form>
     
