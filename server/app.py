@@ -12,8 +12,12 @@ cur = con.cursor()
 @app.route("/")
 def index():
     try:
-        cur = con.cursor()
-        cur.execute("SELECT * FROM bøker")
+        cur.execute("""
+            SELECT bøker.*, 
+                   CASE WHEN lånte_bøker.dato_returnert IS NULL AND lånte_bøker.bok_id IS NOT NULL THEN 'Yes' ELSE 'No' END AS loaned_out 
+            FROM bøker 
+            LEFT JOIN lånte_bøker ON bøker.bok_id = lånte_bøker.bok_id AND lånte_bøker.dato_returnert IS NULL
+        """)
         response = cur.fetchall()
         books = []
         for row in response:
@@ -22,12 +26,14 @@ def index():
                 "bok_tittel": row[1],
                 "bok_forfatter": row[2],
                 "bok_nummer": row[3],
-                "bok_isbn": row[4]
+                "bok_isbn": row[4],
+                "loaned_out": row[5]
             }
             books.append(book)
         return jsonify(books)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
     
 @app.route("/bok/<int:bok_nummer>")
 def bok(bok_nummer):
