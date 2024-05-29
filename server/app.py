@@ -14,7 +14,7 @@ def index():
     try:
         cur.execute("""
             SELECT bøker.*, 
-                   CASE WHEN lånte_bøker.dato_returnert IS NULL AND lånte_bøker.bok_id IS NOT NULL THEN 'Yes' ELSE 'No' END AS loaned_out 
+                   CASE WHEN lånte_bøker.dato_returnert IS NULL AND lånte_bøker.bok_id IS NOT NULL THEN 'Ja' ELSE 'Nei' END AS loaned_out 
             FROM bøker 
             LEFT JOIN lånte_bøker ON bøker.bok_id = lånte_bøker.bok_id AND lånte_bøker.dato_returnert IS NULL
         """)
@@ -35,22 +35,36 @@ def index():
         return jsonify({"error": str(e)}), 500
 
     
-@app.route("/bok/<int:bok_nummer>")
+@app.route("/bok/<int:bok_nummer>", methods=["POST", "GET"])
 def bok(bok_nummer):
-    cur.execute("SELECT * FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
-    response = cur.fetchall()
-    books = []
-    for row in response:
-        book = {
-            "bok_id": row[0],
-            "bok_tittel": row[1],
-            "bok_forfatter": row[2],
-            "bok_nummer": row[3],
-            "bok_isbn": row[4]
-        }
-        books.append(book)
-    return jsonify(books)
+    try:
+        cur.execute("""
+            SELECT bøker.*, lånte_bøker.dato_lånt, låntakere.fornavn, låntakere.etternavn
+            FROM bøker 
+            LEFT JOIN lånte_bøker ON bøker.bok_id = lånte_bøker.bok_id AND lånte_bøker.dato_returnert IS NULL
+            LEFT JOIN låntakere ON lånte_bøker.bruker_id = låntakere.nummer
+            WHERE bøker.bok_nummer = ?
+        """, (bok_nummer,))
+        response = cur.fetchall()
+        books = []
+        for row in response:
+            book = {
+                "bok_id": row[0],
+                "bok_tittel": row[1],
+                "bok_forfatter": row[2],
+                "bok_nummer": row[3],
+                "bok_isbn": row[4],
+                "dato_lånt": row[5],
+                "fornavn": row[6],
+                "etternavn": row[7]
+            }
+            books.append(book)
+        return jsonify(books)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+
+    
 @app.route("/filter/<filter_streng>", methods=["GET"])
 def filter(filter_streng):
     cur.execute("SELECT * FROM bøker WHERE LOWER(bok_tittel) = LOWER(?) OR LOWER(bok_forfatter) = LOWER(?)", (filter_streng, filter_streng))
