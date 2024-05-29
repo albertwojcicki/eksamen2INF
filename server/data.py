@@ -18,10 +18,24 @@ cur.execute("""CREATE TABLE IF NOT EXISTS låntakere (
 ); """)
 con.commit()
 brukere = [
-    ("1", "Albert", "Wojcicki"),
-    ("2", "Mats", "Vedal")
+    ("1000","Tobias", "Gamme"),
+    ("1001", "Emil", "Rime"),
+    ("1002", "Mats", "Vedal"),
+    ("1003", "Albert", "Wojcicki"),
+    ("1004", "Sander", "Bjørge"),
+    ("1005", "Balder", "Bugge"),
+    ("1006", "Didrik", "Evenstuen"),
+    ("1007", "Eskil", "Sollie"),
+    ("1008", "Eskil", "Vang"),
+    ("1009", "Markus", "Etternavn"),
+    ("1010", "Oresta", "Jancikule"),
+    ("1011", "Philip", "Bjerke"),
+    ("1012", "Radwan", "Jouhar"),
+    ("1013", "Sander", "Tokerud")
+
 ]
 cur.executemany("INSERT INTO låntakere (nummer, fornavn, etternavn) VALUES (?, ?, ?)", brukere)
+con.commit()
 bøker = [
     ("Skråpånatta", "Lars Mytting", 1, 9788205548387),
     ("Skråpånatta", "Lars Mytting", 2, 9788205548387),
