@@ -118,7 +118,19 @@ def se_brukere():
         return render_template("brukere.html", data=users)
     else:
         return render_template("brukere.html", error="Failed to retrieve users.")
-
+    
+@app.route("/innlever", methods=["GET", "POST"])
+def innlever():
+    if request.method == "GET":
+        return render_template("lever_bok.html")
+    if request.method == "POST":
+        barcode = request.form.get("barcode")
+        response = requests.post("http://127.0.0.1:5020/innlever", json={"barcode": barcode})
+        if response.status_code == 200:
+            return render_template("lever_bok.html", error = "Boken er levert inn")
+        else:
+            return render_template("lever_bok.html", error="Failed to return book.")
+    
 
     
 if __name__ == "__main__":
