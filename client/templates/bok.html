@@ -1,25 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-{% if data %}
-    {% for book in data %}
-    <h2>{{ book.bok_tittel }}</h2>
-    <p>Skrevet av: {{ book.bok_forfatter }}</p>
-    <p>ISBN: {{ book.bok_isbn }}</p>
-    <p>Bok nummer: {{ book.bok_nummer }}</p>
-    <img src="http://127.0.0.1:5020/static/barcode/{{ book.bok_nummer }}.png" alt="Barcode for {{ book.bok_tittel }}" class="img-barcode">
-    
-    {% if book.dato_lånt %}
-    <p>Lånt av: {{ book.fornavn }} {{ book.etternavn }}</p>
-    <p>Dato lånt: {{ book.dato_lånt|time_only }}</p>
+<div class="book-details">
+    {% if data %}
+        {% for book in data %}
+        <h2>{{ book.bok_tittel }}</h2>
+        <p>Skrevet av: {{ book.bok_forfatter }}</p>
+        <p>ISBN: {{ book.bok_isbn }}</p>
+        <p>Bok nummer: {{ book.bok_nummer }}</p>
+        <img src="http://127.0.0.1:5020/static/barcode/{{ book.bok_nummer }}.png" alt="Barcode for {{ book.bok_tittel }}" class="img-barcode">
+        
+        {% if book.dato_lånt %}
+        <p>Lånt av: {{ book.fornavn }} {{ book.etternavn }}</p>
+        <p>Dato lånt: {{ book.dato_lånt|format_datetime }}</p>
+        {% else %}
+        <p>Ikke lånt ut.</p>
+        {% endif %}
+        
+        <form action="{{ url_for('slettbok', bok_nummer=book.bok_nummer) }}" method="post">
+            <input type="submit" value="Slett bok" class="btn btn-danger">
+        </form>
+        {% endfor %}
     {% else %}
-    <p>Not currently loaned out.</p>
+    <div class="no-book-message">
+        <p>Denne boken finnes ikke</p>
+    </div>
     {% endif %}
-    
-    <form action="{{ url_for('slettbok', bok_nummer=book.bok_nummer) }}" method="post">
-        <input type="submit" value="Slett bok">
-    </form>
-    {% endfor %}
-{% else %}
-<p>Denne boken finnes ikke</p>
-{% endif %}
+</div>
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="div-leggtilbok-form">
+    <h2>Legg til Bok</h2>
 <form action="{{ url_for('leggtilbok')}}" method="post">
     <input type="text" name="bok_tittel" placeholder="Tittel" required>
     <input type="text" name="bok_forfatter" placeholder="Forfatter" required>

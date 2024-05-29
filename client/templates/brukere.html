@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Låntakere</h1>
-{% if data %}
-    <ul class="liste-brukere">
-    {% for item in data %}
-        <li><a href="{{ url_for('låntaker_detail', nummer=item.nummer) }}" >{{ item.fornavn }} {{ item.etternavn }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No users found.</p>
-{% endif %}
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
+<div class="content-wrapper">
+    <div class="book-item-container">
+        <h1 class="text-center h1" style="color:black;">Låntakere</h1>
+        {% if data %}
+        <ul class="liste-brukere">
+            {% for item in data %}
+            <li><a href="{{ url_for('låntaker_detail', nummer=item.nummer) }}" >{{ item.fornavn }} {{ item.etternavn }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="no-book-message">
+            <p>No users found.</p>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

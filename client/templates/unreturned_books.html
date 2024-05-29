@@ -1,29 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Brukere med utlånte bøker</h1>
-{% if error %}
+<div class="content-wrapper">
+    <div class="book-item-container">
+    <h1 class="text-center h1">Brukere med utlånte bøker</h1>
+    {% if error %}
     <div class="error-message">
         <p>{{ error }}</p>
     </div>
-{% endif %}
-{% if data %}
-    <table>
-        <tr>
-            <th>Fornavn</th>
-            <th>Etternavn</th>
-            <th>Bok tittel</th>
-            <th>Bok nummer</th>
-        </tr>
-        {% for record in data %}
-        <tr>
-            <td>{{ record.fornavn }}</td>
-            <td>{{ record.etternavn }}</td>
-            <td>{{ record.bok_tittel }}</td>
-            <td>{{ record.bok_nummer }}</td>
-        </tr>
-        {% endfor %}
+    {% endif %}
+    {% if data %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fornavn</th>
+                <th>Etternavn</th>
+                <th>Bok tittel</th>
+                <th>Bok nummer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in data %}
+            <tr>
+                <td>{{ record.fornavn }}</td>
+                <td>{{ record.etternavn }}</td>
+                <td>{{ record.bok_tittel }}</td>
+                <td>{{ record.bok_nummer }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-{% else %}
-    <p>Ingen utlånte bøker.</p>
-{% endif %}
+    {% else %}
+    <div class="no-book-message">
+        <p>Ingen utlånte bøker.</p>
+    </div>
+    {% endif %}
+</div></div>
 {% endblock %}

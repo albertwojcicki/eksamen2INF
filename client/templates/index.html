@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="text-center h1">Bøker</h1>
+<h1 class="text-center h1" id="h1-overskrift">Bøker</h1>
 
 <div class="div-forms">
     <form action="{{ url_for('index') }}" method="post">
+        <label for="barcode">Søk med forfatter eller tittel:</label>
         <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" placeholder="Search by Title/Author" required>
         <input type="submit" value="Search">
     </form>
@@ -18,7 +19,7 @@
     <form method="POST" action="{{ url_for('scan_user') }}">
         <label for="user_barcode">User Barcode:</label>
         <input type="number" id="user_barcode" name="barcode" min="1000" max="1020" required>
-        <button type="submit">Scan</button>
+        <input type="submit" value="Søk">
     </form>
 </div>
 
