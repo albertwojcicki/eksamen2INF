@@ -99,6 +99,18 @@ def låntaker_detail(nummer):
     else:
         return render_template("enkel_bruker.html", error="Brukeren finnes ikke.")
 
+@app.route("/show_unreturned_books", methods=["GET"])
+def show_unreturned_books():
+    try:
+        response = requests.get("http://127.0.0.1:5020/unreturned_books")
+        response.raise_for_status()
+        unreturned_books = response.json()
+        return render_template("unreturned_books.html", data=unreturned_books)
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {e}")
+        return render_template("unreturned_books.html", error="Failed to retrieve unreturned books.")
+
+
 @app.template_filter('time_only')
 def time_only(date_str):
     # Adjust the format if necessary to match the exact format of the string in your database
