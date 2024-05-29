@@ -92,6 +92,12 @@ def leggtilbok():
     suksessfull_melding = f"{bok_tittel} ble registrert"
     return jsonify({"resultat": suksessfull_melding}), 201
 
+@app.route("/se_brukere", methods = ["GET"])
+def se_brukere():
+    cur.execute("SELECT fornavn, etternavn FROM låntakere")
+    users = cur.fetchall()
+    user_list = [{"fornavn": user[0], "etternavn": user[1]} for user in users]
+    return jsonify(user_list)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5020)
