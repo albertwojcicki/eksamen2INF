@@ -174,6 +174,29 @@ def get_book(bok_nummer):
     else:
         return jsonify({"error": "Bok ikke funnet"}), 404
     
+@app.route("/unreturned_books", methods=["GET"])
+def unreturned_books():
+    try:
+        cur.execute("""
+            SELECT låntakere.fornavn, låntakere.etternavn, bøker.bok_tittel, bøker.bok_nummer
+            FROM lånte_bøker
+            JOIN låntakere ON lånte_bøker.bruker_id = låntakere.nummer
+            JOIN bøker ON lånte_bøker.bok_id = bøker.bok_id
+            WHERE lånte_bøker.dato_returnert IS NULL
+        """)
+        response = cur.fetchall()
+        unreturned_books = []
+        for row in response:
+            record = {
+                "fornavn": row[0],
+                "etternavn": row[1],
+                "bok_tittel": row[2],
+                "bok_nummer": row[3]
+            }
+            unreturned_books.append(record)
+        return jsonify(unreturned_books)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/innlever", methods=["POST"])
 def innlever():
