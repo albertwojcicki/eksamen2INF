@@ -106,6 +106,9 @@ def confirm_loan():
         response = requests.post(f"http://127.0.0.1:5020/loan_book/{book_id}", json={"brukernavn": user_id})
         if response.status_code == 200:
             return render_template("loan_success.html", message="Loan confirmed.")
+        elif response.status_code == 400:
+
+            return render_template("confirm_loan.html", error="Boken er allere lånt ut")
         else:
             return render_template("confirm_loan.html", error="Failed to confirm loan.")
     return redirect(url_for('index'))
