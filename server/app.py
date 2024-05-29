@@ -14,7 +14,7 @@ def index():
     try:
         cur.execute("""
             SELECT bøker.*, 
-                   CASE WHEN lånte_bøker.dato_returnert IS NULL AND lånte_bøker.bok_id IS NOT NULL THEN 'Ja' ELSE 'Nei' END AS loaned_out 
+                   CASE WHEN lånte_bøker.dato_returnert IS NULL AND lånte_bøker.bok_id IS NOT NULL THEN 'Utilgjengelig' ELSE 'Tilgjengelig' END AS loaned_out 
             FROM bøker 
             LEFT JOIN lånte_bøker ON bøker.bok_id = lånte_bøker.bok_id AND lånte_bøker.dato_returnert IS NULL
         """)
