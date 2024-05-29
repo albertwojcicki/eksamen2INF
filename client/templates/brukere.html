@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Brukere</h1>
+<h1>Låntakere</h1>
 {% if data %}
-    <ul>
+    <ul class="liste-brukere">
     {% for item in data %}
-        <li>{{ item.fornavn }} {{ item.etternavn }}</li>
+        <li><a href="{{ url_for('låntaker_detail', nummer=item.nummer) }}" >{{ item.fornavn }} {{ item.etternavn }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
