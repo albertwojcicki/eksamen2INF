@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="book-item">
 <h1>Detaljer om Låntaker</h1>
 {% if user %}
     <p>Fornavn: {{ user.fornavn }}</p>
@@ -15,5 +16,5 @@
     </form>
 {% else %}
     <p>{{ error }}</p>
-{% endif %}
+{% endif %}</div>
 {% endblock %}

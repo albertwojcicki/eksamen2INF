@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Return Book</h1>
+<div class="book-item">
+<h1>Lever inn bok</h1>
 <form method="POST" action="{{ url_for('innlever') }}">
-    <label for="barcode">Book Barcode:</label>
+    <label for="barcode">Bok kode:</label>
     <input type="number" id="barcode" min="1" max="50" name="barcode" required>
-    <button type="submit">Return</button>
+    <button type="submit">Lever</button>
 </form>
 {% if error %}
     <p>{{ error }}</p>
-{% endif %}
+{% endif %}</div>
 {% endblock %}

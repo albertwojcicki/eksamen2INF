@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Confirm Loan</h1>
+<div class="book-item">
+<h1>Bekreft lånet</h1>
 {% if user and book %}
     <p>Confirm loan for:</p>
     <p>User: {{ user.fornavn }} {{ user.etternavn }} (ID: {{ user.nummer }})</p>
@@ -13,5 +14,5 @@
     </form>
 {% else %}
     <p>{{ error }}</p>
-{% endif %}
+{% endif %}</div>
 {% endblock %}
