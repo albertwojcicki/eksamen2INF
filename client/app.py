@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, json, url_
 import requests
 from flask_cors import CORS
 import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -97,6 +98,15 @@ def låntaker_detail(nummer):
         return render_template("enkel_bruker.html", user=user)
     else:
         return render_template("enkel_bruker.html", error="User not found.")
+
+@app.template_filter('time_only')
+def time_only(date_str):
+    # Adjust the format if necessary to match the exact format of the string in your database
+    date_obj = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S.%f')
+    return date_obj.strftime('%H:%M')
+
+# Register the filter
+app.jinja_env.filters['time_only'] = time_only
 
 @app.route("/confirm_loan", methods=["POST"])
 def confirm_loan():
