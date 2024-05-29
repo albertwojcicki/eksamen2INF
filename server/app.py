@@ -70,7 +70,6 @@ def filter(filter_streng):
     cur.execute("SELECT * FROM bøker WHERE LOWER(bok_tittel) = LOWER(?) OR LOWER(bok_forfatter) = LOWER(?)", (filter_streng, filter_streng))
     response = cur.fetchall()
     if not response:
-        print("No books found with the given filter")
         return jsonify({"error": "Ingen bøker med denne tittelen/ forfatteren"}), 404
     books = []
     for row in response:
@@ -132,14 +131,14 @@ def get_låntaker(nummer):
         }
         return jsonify(user_data)
     else:
-        return jsonify({"error": "User not found"}), 404
+        return jsonify({"error": "Bruker ikke funnet"}), 404
 
 @app.route("/loan_book/<int:bok_id>", methods=["POST"])
 def loan_book(bok_id):
     data = request.get_json()
     brukernavn = data.get("brukernavn")
     if not brukernavn:
-        return jsonify({"error": "brukernavn is required"}), 401
+        return jsonify({"error": "brukernavn mangler"}), 401
 
     cur.execute("SELECT nummer FROM låntakere WHERE nummer = ?", (brukernavn,))
     user = cur.fetchone()
@@ -157,7 +156,7 @@ def loan_book(bok_id):
 
     cur.execute("INSERT INTO lånte_bøker (bruker_id, bok_id, dato_lånt) VALUES (?, ?, ?)", (user_id, bok_id, dato_lånt))
     con.commit()
-    return jsonify({"message": "Book loaned successfully"}), 200
+    return jsonify({"message": "Utlånet ble vellykket"}), 200
 
 @app.route("/book/<int:bok_nummer>", methods=["GET"])
 def get_book(bok_nummer):
@@ -173,7 +172,7 @@ def get_book(bok_nummer):
         }
         return jsonify(book_data)
     else:
-        return jsonify({"error": "Book not found"}), 404
+        return jsonify({"error": "Bok ikke funnet"}), 404
     
 
 @app.route("/innlever", methods=["POST"])
@@ -182,8 +181,8 @@ def innlever():
     cur.execute("DELETE FROM lånte_bøker WHERE bok_id = ? AND dato_returnert IS NULL", (barcode,))
     con.commit()
     if cur.rowcount == 0:
-        return jsonify({"error": "Book not found or already returned"}), 404
-    return jsonify({"message": "Book returned successfully"}), 200
+        return jsonify({"error": "Bok ikke funnet eller allerede innlevert"}), 404
+    return jsonify({"message": "Boken ble innlevert"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, port=5020)

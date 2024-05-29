@@ -91,13 +91,13 @@ def låntaker_detail(nummer):
                 user = user_response.json() if user_response.status_code == 200 else {}
                 return render_template("confirm_loan.html", user=user, book=book)
             else:
-                return render_template("låntaker_detail.html", error="Book not found.", nummer=nummer)
+                return render_template("låntaker_detail.html", error="Boken finnes ikke.", nummer=nummer)
     response = requests.get(f"http://127.0.0.1:5020/låntaker/{nummer}")
     if response.status_code == 200:
         user = response.json()
         return render_template("enkel_bruker.html", user=user)
     else:
-        return render_template("enkel_bruker.html", error="User not found.")
+        return render_template("enkel_bruker.html", error="Brukeren finnes ikke.")
 
 @app.template_filter('time_only')
 def time_only(date_str):
@@ -115,12 +115,12 @@ def confirm_loan():
     if user_id and book_id:
         response = requests.post(f"http://127.0.0.1:5020/loan_book/{book_id}", json={"brukernavn": user_id})
         if response.status_code == 200:
-            return render_template("loan_success.html", message="Loan confirmed.")
+            return render_template("loan_success.html", message="Boken er lånt ut.")
         elif response.status_code == 400:
 
             return render_template("confirm_loan.html", error="Boken er allere lånt ut")
         else:
-            return render_template("confirm_loan.html", error="Failed to confirm loan.")
+            return render_template("confirm_loan.html", error="Kunne ikke låne bok.")
     return redirect(url_for('index'))
 
 @app.route("/se_brukere", methods=["GET"])
@@ -130,7 +130,7 @@ def se_brukere():
         users = response.json()
         return render_template("brukere.html", data=users)
     else:
-        return render_template("brukere.html", error="Failed to retrieve users.")
+        return render_template("brukere.html", error="Kunne ikke hente brukere.")
     
 @app.route("/innlever", methods=["GET", "POST"])
 def innlever():
@@ -142,7 +142,7 @@ def innlever():
         if response.status_code == 200:
             return render_template("lever_bok.html", error = "Boken er levert inn")
         else:
-            return render_template("lever_bok.html", error="Failed to return book.")
+            return render_template("lever_bok.html", error="Kunne ikke levere inn bok.")
     
 
     
