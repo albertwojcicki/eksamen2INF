@@ -111,15 +111,14 @@ def show_unreturned_books():
         return render_template("unreturned_books.html", error="Failed to retrieve unreturned books.")
 
 
-@app.template_filter('time_only')
-def time_only(date_str):
-    # Adjust the format if necessary to match the exact format of the string in your database
-    date_obj = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S.%f')
-    return date_obj.strftime('%H:%M')
+
+@app.template_filter('format_datetime')
+def format_datetime(date_str):
+    date_obj = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S.%f')  # Adjust format if necessary
+    return date_obj.strftime('%Y-%m-%d %H:%M')
 
 # Register the filter
-app.jinja_env.filters['time_only'] = time_only
-
+app.jinja_env.filters['format_datetime'] = format_datetime
 @app.route("/confirm_loan", methods=["POST"])
 def confirm_loan():
     user_id = request.form.get("user_id")
