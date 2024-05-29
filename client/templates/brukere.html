@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Brukere</h1>
+{% if data %}
+    <ul>
+    {% for item in data %}
+        <li>{{ item.fornavn }} {{ item.etternavn }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No users found.</p>
+{% endif %}
+{% if error %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}
