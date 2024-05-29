@@ -36,6 +36,7 @@
                 <p>Skrevet av: {{ book.bok_forfatter }}</p>
                 <p>ISBN: {{ book.bok_isbn }}</p>
                 <p>Bok nummer: {{ book.bok_nummer }}</p>
+                <p>Lånt ut: {{ book.loaned_out }}</p>
                 <input type="hidden" name="bok_nummer" value="{{ book.bok_nummer }}">
                 <button type="submit">Se boken</button>
             </form>
