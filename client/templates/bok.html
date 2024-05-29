@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="book-details">
-    {% if data %}
-        {% for book in data %}
+{% if data and data|length > 0 %}
+    {% set book = data[0] %}
+    <div class="book-details">
         <h2>{{ book.bok_tittel }}</h2>
         <p>Skrevet av: {{ book.bok_forfatter }}</p>
         <p>ISBN: {{ book.bok_isbn }}</p>
@@ -19,11 +19,10 @@
         <form action="{{ url_for('slettbok', bok_nummer=book.bok_nummer) }}" method="post">
             <input type="submit" value="Slett bok" class="btn btn-danger">
         </form>
-        {% endfor %}
-    {% else %}
+    </div>
+{% else %}
     <div class="no-book-message">
         <p>Denne boken finnes ikke</p>
     </div>
-    {% endif %}
-</div>
+{% endif %}
 {% endblock %}
