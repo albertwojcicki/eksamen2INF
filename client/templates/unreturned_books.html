@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Brukere med utlånte bøker</h1>
+{% if error %}
+    <div class="error-message">
+        <p>{{ error }}</p>
+    </div>
+{% endif %}
+{% if data %}
+    <table>
+        <tr>
+            <th>Fornavn</th>
+            <th>Etternavn</th>
+            <th>Bok tittel</th>
+            <th>Bok nummer</th>
+        </tr>
+        {% for record in data %}
+        <tr>
+            <td>{{ record.fornavn }}</td>
+            <td>{{ record.etternavn }}</td>
+            <td>{{ record.bok_tittel }}</td>
+            <td>{{ record.bok_nummer }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Ingen utlånte bøker.</p>
+{% endif %}
+{% endblock %}
