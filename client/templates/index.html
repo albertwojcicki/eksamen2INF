@@ -5,27 +5,27 @@
 <div class="div-forms">
     <form action="{{ url_for('index') }}" method="post">
         <label for="barcode">Søk med forfatter eller tittel:</label>
-        <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" placeholder="Search by Title/Author" required>
-        <input type="submit" value="Search">
+        <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" placeholder="Søk etter bøker" required>
+        <input type="submit" value="Søk">
     </form>
     <form action="{{ url_for('index') }}">
         <input type="submit" value="Reset" id="resetForm">
     </form>
     <form action="{{ url_for('søk_barcode') }}" method="get">
         <label for="barcode">Scan barkoden:</label>
-        <input type="number" name="barcode" id="barcode" required>
-        <input type="submit" value="Search by Barcode">
+        <input type="number" name="barcode" id="barcode" placeholder="Søk med kode" required>
+        <input type="submit" value="Søk med kode">
     </form>
     <form method="POST" action="{{ url_for('scan_user') }}">
         <label for="user_barcode">User Barcode:</label>
-        <input type="number" id="user_barcode" name="barcode" min="1000" max="1020" required>
+        <input type="number" id="user_barcode" name="barcode" min="1000" max="1020"  placeholder="Søk" required>
         <input type="submit" value="Søk">
     </form>
 </div>
 
 {% if error %}
 <div class="error-message">
-    <p>{{ error }}</p>
+   
 </div>
 {% endif %}
 
@@ -37,7 +37,7 @@
             <p>Skrevet av: {{ book.bok_forfatter }}</p>
             <p>ISBN: {{ book.bok_isbn }}</p>
             <p>Bok nummer: {{ book.bok_nummer }}</p>
-            <p>Lånt ut: {{ book.loaned_out }}</p>
+            <p>{{ book.loaned_out }}</p>
             <form action="{{ url_for('bok', bok_nummer=book.bok_nummer) }}" method="post">
                 <input type="hidden" name="bok_nummer" value="{{ book.bok_nummer }}">
                 <button type="submit">Se boken</button>
