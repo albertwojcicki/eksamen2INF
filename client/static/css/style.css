@@ -110,7 +110,7 @@ article {
 
 .h1 {
     color: white;
-    color: white !important;
+
 }
 
 .book-item {
@@ -163,8 +163,63 @@ a {
 
 .a-header {
     padding-left: 20px;
-    color: white;
+    color: white !important;
     text-decoration: none;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table .table {
+    background-color: #fff;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.no-book-message {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px;
+    text-align: center;
 }
 
 .div-leggtilbok-form {
@@ -277,6 +332,27 @@ a {
     flex-direction: column;
     align-items: center;
 }
+.liste-brukere, a {
+    list-style-type: none !important;
+    color: black !important;
+}
+.book-item-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 130%;
+    color: black;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text_center, h1 {
+    color: black !important;
+}
 
 .book-item h2 {
     font-family: 'Georgia', serif;
@@ -310,7 +386,9 @@ a {
     margin-top: 0.5rem;
     transition: background-color 0.3s ease;
 }
-
+#h1-overskrift {
+    color: white !important;
+}
 .book-item form input[type="submit"]:hover, 
 .book-item form button:hover {
     background-color: #0056b3;
