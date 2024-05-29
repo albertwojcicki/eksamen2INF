@@ -154,7 +154,7 @@ def innlever():
         if response.status_code == 200:
             return render_template("lever_bok.html", error = "Boken er levert inn")
         else:
-            return render_template("lever_bok.html", error="Kunne ikke levere inn bok.")
+            return render_template("lever_bok.html", error="Boken er ikke lånt ut.")
     
 
     
