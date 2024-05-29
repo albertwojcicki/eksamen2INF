@@ -92,12 +92,25 @@ def leggtilbok():
     suksessfull_melding = f"{bok_tittel} ble registrert"
     return jsonify({"resultat": suksessfull_melding}), 201
 
-@app.route("/se_brukere", methods = ["GET"])
+@app.route("/se_brukere", methods=["GET"])
 def se_brukere():
-    cur.execute("SELECT fornavn, etternavn FROM låntakere")
+    cur.execute("SELECT nummer, fornavn, etternavn FROM låntakere")
     users = cur.fetchall()
-    user_list = [{"fornavn": user[0], "etternavn": user[1]} for user in users]
+    user_list = [{"nummer": user[0], "fornavn": user[1], "etternavn": user[2]} for user in users]
     return jsonify(user_list)
 
+@app.route("/låntaker/<int:nummer>", methods=["GET"])
+def get_låntaker(nummer):
+    cur.execute("SELECT fornavn, etternavn FROM låntakere WHERE nummer = ?", (nummer,))
+    user = cur.fetchone()
+    if user:
+        user_data = {
+            "fornavn": user[0],
+            "etternavn": user[1],
+            "nummer": nummer
+        }
+        return jsonify(user_data)
+    else:
+        return jsonify({"error": "User not found"}), 404
 if __name__ == "__main__":
     app.run(debug=True, port=5020)
