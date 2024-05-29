@@ -148,6 +148,16 @@ def get_book(bok_nummer):
         return jsonify(book_data)
     else:
         return jsonify({"error": "Book not found"}), 404
+    
+
+@app.route("/innlever", methods=["POST"])
+def innlever():
+    barcode = request.get_json()["barcode"]
+    cur.execute("DELETE FROM lånte_bøker WHERE bok_id = ? AND dato_returnert IS NULL", (barcode,))
+    con.commit()
+    if cur.rowcount == 0:
+        return jsonify({"error": "Book not found or already returned"}), 404
+    return jsonify({"message": "Book returned successfully"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, port=5020)
