@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("/var/www/html/database.db", check_same_thread=False)
+con = sqlite3.connect("database.db", check_same_thread=False)
 cur = con.cursor()
 
 cur.execute("""CREATE TABLE IF NOT EXISTS bøker (
@@ -10,6 +10,18 @@ cur.execute("""CREATE TABLE IF NOT EXISTS bøker (
                 bok_isbn INTEGER
             );""")
 con.commit()
+
+cur.execute("""CREATE TABLE IF NOT EXISTS låntakere (
+            nummer INTEGER,
+            fornavn TEXT,
+            etternavn TEXT
+); """)
+con.commit()
+brukere = [
+    ("1", "Albert", "Wojcicki"),
+    ("2", "Mats", "Vedal")
+]
+cur.executemany("INSERT INTO låntakere (nummer, fornavn, etternavn) VALUES (?, ?, ?)", brukere)
 bøker = [
     ("Skråpånatta", "Lars Mytting", 1, 9788205548387),
     ("Skråpånatta", "Lars Mytting", 2, 9788205548387),
