@@ -11,7 +11,8 @@ header {
     align-items: center;
     justify-content: left;
     padding-left: 20px;
-    color: white;
+    color: white !important;
+
 }
 article {
     display: flex;
@@ -19,13 +20,17 @@ article {
     align-items: center;
     width: 100%;
 }
-
+.a-header {
+    color: white;
+}
 #book-list {
     width: 100%;
     display: flex;
 
 }
-
+.liste_brukere {
+    color: black !important;
+}
 #book-list {
     width: 100%;
     display: flex;
@@ -77,7 +82,7 @@ footer {
 }
 
 a {
-    color: white;
+    /* color: white */
     text-decoration: none;
     padding-left: 20px;
 }
