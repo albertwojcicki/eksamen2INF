@@ -1,42 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Bøker</h1>
+<h1 class="text-center h1">Bøker</h1>
 
 <div class="div-forms">
     <form action="{{ url_for('index') }}" method="post">
-        <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" required>
+        <input type="text" name="filter_streng" id="filter_streng" value="{{ filter_streng }}" placeholder="Search by Title/Author" required>
         <input type="submit" value="Search">
     </form>
     <form action="{{ url_for('index') }}">
         <input type="submit" value="Reset" id="resetForm">
     </form>
     <form action="{{ url_for('søk_barcode') }}" method="get">
-        <label for="number">Scan barkoden med scanneren</label>
-        <input type="number" name="barcode" required>
+        <label for="barcode">Scan barkoden:</label>
+        <input type="number" name="barcode" id="barcode" required>
         <input type="submit" value="Search by Barcode">
     </form>
     <form method="POST" action="{{ url_for('scan_user') }}">
-        <label for="barcode">User Barcode:</label>
-        <input type="number" id="barcode" name="barcode" min="1000" max="1020" required>
+        <label for="user_barcode">User Barcode:</label>
+        <input type="number" id="user_barcode" name="barcode" min="1000" max="1020" required>
         <button type="submit">Scan</button>
     </form>
-    
 </div>
+
 {% if error %}
 <div class="error-message">
     <p>{{ error }}</p>
 </div>
 {% endif %}
+
 <div id="book-list">
     {% if data %}
         {% for book in data %}
         <div class="book-item">
+            <h2>{{ book.bok_tittel }}</h2>
+            <p>Skrevet av: {{ book.bok_forfatter }}</p>
+            <p>ISBN: {{ book.bok_isbn }}</p>
+            <p>Bok nummer: {{ book.bok_nummer }}</p>
+            <p>Lånt ut: {{ book.loaned_out }}</p>
             <form action="{{ url_for('bok', bok_nummer=book.bok_nummer) }}" method="post">
-                <h2>{{ book.bok_tittel }}</h2>
-                <p>Skrevet av: {{ book.bok_forfatter }}</p>
-                <p>ISBN: {{ book.bok_isbn }}</p>
-                <p>Bok nummer: {{ book.bok_nummer }}</p>
-                <p>Lånt ut: {{ book.loaned_out }}</p>
                 <input type="hidden" name="bok_nummer" value="{{ book.bok_nummer }}">
                 <button type="submit">Se boken</button>
             </form>
@@ -46,9 +47,12 @@
         </div>
         {% endfor %}
     {% else %}
-    <h4>Ingen bøker med denne tittelen/forfatteren</h4>
+    <div class="no-book-message">
+        <h4>Ingen bøker med denne tittelen/forfatteren</h4>
+    </div>
     {% endif %}
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // If filter_streng is None or empty, clear the input field
@@ -56,7 +60,7 @@
         if (filterStreng == "None") {
             document.getElementById("filter_streng").value = "";
         }
-        
+
         // Handle the reset button click
         document.getElementById("resetForm").addEventListener("submit", function() {
             sessionStorage.removeItem("filter_streng"); // Clear the session storage
