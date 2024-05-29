@@ -70,6 +70,46 @@ def søk_barcode():
     print(barcode)
     return redirect(url_for("bok", bok_nummer = int(barcode)))
 
+@app.route("/scan_user", methods=["GET", "POST"])
+def scan_user():
+    if request.method == "POST":
+        barcode = request.form.get("barcode")
+        if barcode:
+            return redirect(url_for('låntaker_detail', nummer=barcode))
+    return render_template("index.html")
+
+@app.route("/låntaker/<int:nummer>", methods=["GET", "POST"])
+def låntaker_detail(nummer):
+    if request.method == "POST":
+        book_barcode = request.form.get("book_barcode")
+        if book_barcode:
+            response = requests.get(f"http://127.0.0.1:5020/book/{book_barcode}")
+            if response.status_code == 200:
+                book = response.json()
+                user_response = requests.get(f"http://127.0.0.1:5020/låntaker/{nummer}")
+                user = user_response.json() if user_response.status_code == 200 else {}
+                return render_template("confirm_loan.html", user=user, book=book)
+            else:
+                return render_template("låntaker_detail.html", error="Book not found.", nummer=nummer)
+    response = requests.get(f"http://127.0.0.1:5020/låntaker/{nummer}")
+    if response.status_code == 200:
+        user = response.json()
+        return render_template("enkel_bruker.html", user=user)
+    else:
+        return render_template("enkel_bruker.html", error="User not found.")
+
+@app.route("/confirm_loan", methods=["POST"])
+def confirm_loan():
+    user_id = request.form.get("user_id")
+    book_id = request.form.get("book_id")
+    if user_id and book_id:
+        response = requests.post(f"http://127.0.0.1:5020/loan_book/{book_id}", json={"brukernavn": user_id})
+        if response.status_code == 200:
+            return render_template("loan_success.html", message="Loan confirmed.")
+        else:
+            return render_template("confirm_loan.html", error="Failed to confirm loan.")
+    return redirect(url_for('index'))
+
 @app.route("/se_brukere", methods=["GET"])
 def se_brukere():
     response = requests.get("http://127.0.0.1:5020/se_brukere")
@@ -79,14 +119,7 @@ def se_brukere():
     else:
         return render_template("brukere.html", error="Failed to retrieve users.")
 
-@app.route("/låntaker/<int:nummer>", methods=["GET"])
-def låntaker_detail(nummer):
-    response = requests.get(f"http://127.0.0.1:5020/låntaker/{nummer}")
-    if response.status_code == 200:
-        user = response.json()
-        return render_template("enkel_bruker.html", user=user)
-    else:
-        return render_template("enkel_bruker.html", error="User not found.")
+
     
 if __name__ == "__main__":
     app.run(debug=True)

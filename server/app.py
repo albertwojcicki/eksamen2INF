@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, json, url_
 import requests
 from flask_cors import CORS
 import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -112,5 +113,41 @@ def get_låntaker(nummer):
         return jsonify(user_data)
     else:
         return jsonify({"error": "User not found"}), 404
+
+@app.route("/loan_book/<int:bok_id>", methods=["POST"])
+def loan_book(bok_id):
+    data = request.get_json()
+    brukernavn = data.get("brukernavn")
+    if not brukernavn:
+        return jsonify({"error": "brukernavn is required"}), 400
+
+    cur.execute("SELECT nummer FROM låntakere WHERE nummer = ?", (brukernavn,))
+    user = cur.fetchone()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user_id = user[0]
+    dato_lånt = datetime.now()
+
+    cur.execute("INSERT INTO lånte_bøker (bruker_id, bok_id, dato_lånt) VALUES (?, ?, ?)", (user_id, bok_id, dato_lånt))
+    con.commit()
+    return jsonify({"message": "Book loaned successfully"}), 200
+
+@app.route("/book/<int:bok_nummer>", methods=["GET"])
+def get_book(bok_nummer):
+    cur.execute("SELECT bok_id, bok_tittel, bok_forfatter, bok_nummer, bok_isbn FROM bøker WHERE bok_nummer = ?", (bok_nummer,))
+    book = cur.fetchone()
+    if book:
+        book_data = {
+            "bok_id": book[0],
+            "bok_tittel": book[1],
+            "bok_forfatter": book[2],
+            "bok_nummer": book[3],
+            "bok_isbn": book[4]
+        }
+        return jsonify(book_data)
+    else:
+        return jsonify({"error": "Book not found"}), 404
+
 if __name__ == "__main__":
     app.run(debug=True, port=5020)

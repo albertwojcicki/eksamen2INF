@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Confirm Loan</h1>
+{% if user and book %}
+    <p>Confirm loan for:</p>
+    <p>User: {{ user.fornavn }} {{ user.etternavn }} (ID: {{ user.nummer }})</p>
+    <p>Book: {{ book.bok_tittel }} by {{ book.bok_forfatter }} (ISBN: {{ book.bok_isbn }})</p>
+    <form method="POST" action="{{ url_for('confirm_loan') }}">
+        <input type="hidden" name="user_id" value="{{ user.nummer }}">
+        <input type="hidden" name="book_id" value="{{ book.bok_id }}">
+        <button type="submit">Confirm Loan</button>
+    </form>
+{% else %}
+    <p>{{ error }}</p>
+{% endif %}
+{% endblock %}
