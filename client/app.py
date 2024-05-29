@@ -70,8 +70,6 @@ def søk_barcode():
     print(barcode)
     return redirect(url_for("bok", bok_nummer = int(barcode)))
 
-
-
 @app.route("/se_brukere", methods=["GET"])
 def se_brukere():
     response = requests.get("http://127.0.0.1:5020/se_brukere")
@@ -80,5 +78,15 @@ def se_brukere():
         return render_template("brukere.html", data=users)
     else:
         return render_template("brukere.html", error="Failed to retrieve users.")
+
+@app.route("/låntaker/<int:nummer>", methods=["GET"])
+def låntaker_detail(nummer):
+    response = requests.get(f"http://127.0.0.1:5020/låntaker/{nummer}")
+    if response.status_code == 200:
+        user = response.json()
+        return render_template("enkel_bruker.html", user=user)
+    else:
+        return render_template("enkel_bruker.html", error="User not found.")
+    
 if __name__ == "__main__":
     app.run(debug=True)
