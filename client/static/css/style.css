@@ -3,6 +3,14 @@
     margin: 0;
 }
 
+body {
+    background: url('https://images.unsplash.com/photo-1532012197267-da84d127e765') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
 
 header {
     height: 50px;
@@ -11,26 +19,20 @@ header {
     align-items: center;
     justify-content: left;
     padding-left: 20px;
-    color: white !important;
-
+    color: white;
+    margin-bottom: 20px;
+    z-index: 1;
 }
+
 article {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
+    height: 100%;
 }
-.a-header {
-    color: white;
-}
-#book-list {
-    width: 100%;
-    display: flex;
 
-}
-.liste_brukere {
-    color: black !important;
-}
 #book-list {
     width: 100%;
     display: flex;
@@ -38,19 +40,85 @@ article {
     gap: 20px;
     justify-content: center;
 }
+
 .img-barcode {
     width: 150px;
 }
 
+.a-her {
+    color: black;
+}
+
 .div-forms {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    margin-top: 2rem;
+    gap: 1rem;
 }
+
+.div-forms form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    margin: 0 1rem;
+}
+
+.div-forms input[type="text"],
+.div-forms input[type="number"],
+.div-forms input[type="submit"] {
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.div-forms input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.div-forms input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.div-forms label {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    text-align: center;
+}
+
+.h1 {
+    color: white;
+    color: white !important;
+}
+
 .book-item {
     background-color: #f4f4f4;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-    width: calc(33.333% - 40px); /* 3 items per row, adjust as needed */
+    width: calc(33.333% - 40px);
     box-sizing: border-box;
 }
 
@@ -66,10 +134,12 @@ article {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .content {
     flex: 1;
+    width: 100%;
 }
 
 footer {
@@ -82,9 +152,19 @@ footer {
 }
 
 a {
-    /* color: white */
+    color: white;
     text-decoration: none;
+}
+
+.div-header-container {
+    display: flex;
+    align-items: center;
+}
+
+.a-header {
     padding-left: 20px;
+    color: white;
+    text-decoration: none;
 }
 
 .div-leggtilbok-form {
@@ -94,4 +174,209 @@ a {
     width: 100%;
     align-items: center;
     padding-top: 20px;
+}
+
+.login-container h2 {
+    font-family: 'Georgia', serif;
+    margin-bottom: 1rem;
+}
+
+.login-container input[type="text"], 
+.login-container input[type="password"] {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.login-container input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.h2-title {
+    color: white;
+}
+
+.div-leggtilbok-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    height: 470px;
+    box-sizing: border-box;
+}
+
+.div-leggtilbok-form form {
+    width: 100%;
+}
+
+.div-leggtilbok-form input[type="text"],
+.div-leggtilbok-form input[type="number"],
+.div-leggtilbok-form input[type="submit"] {
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.div-leggtilbok-form input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem;
+    transition: background-color 0.3s ease;
+}
+
+.div-leggtilbok-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.div-leggtilbok-form h2 {
+    font-family: 'Georgia', serif;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+#book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.book-item {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: calc(33.333% - 40px);
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-item h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.book-item p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    text-align: center;
+}
+
+.book-item form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-item form input[type="submit"], 
+.book-item form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.book-item form input[type="submit"]:hover, 
+.book-item form button:hover {
+    background-color: #0056b3;
+}
+
+.book-details {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 350px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.book-details h2 {
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-details p {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+}
+
+.book-details img.img-barcode {
+    margin: 1rem 0;
+    width: 200px;
+    height: auto;
+}
+
+.book-details form {
+    width: 100%;
+}
+
+.book-details form input[type="submit"] {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-details form input[type="submit"]:hover {
+    background-color: #ff1a1a;
+}
+
+.no-book-message {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 350px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
 }
