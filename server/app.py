@@ -119,12 +119,18 @@ def loan_book(bok_id):
     data = request.get_json()
     brukernavn = data.get("brukernavn")
     if not brukernavn:
-        return jsonify({"error": "brukernavn is required"}), 400
+        return jsonify({"error": "brukernavn is required"}), 401
 
     cur.execute("SELECT nummer FROM låntakere WHERE nummer = ?", (brukernavn,))
     user = cur.fetchone()
     if not user:
         return jsonify({"error": "User not found"}), 404
+
+    # Check if the book is already loaned
+    cur.execute("SELECT * FROM lånte_bøker WHERE bok_id = ? AND dato_returnert IS NULL", (bok_id,))
+    loaned_book = cur.fetchone()
+    if loaned_book:
+        return jsonify({"error": "Book is already loaned out"}), 400
 
     user_id = user[0]
     dato_lånt = datetime.now()
