@@ -16,6 +16,18 @@ cur.execute("""CREATE TABLE IF NOT EXISTS låntakere (
             fornavn TEXT,
             etternavn TEXT
 ); """)
+cur.execute("""
+    CREATE TABLE IF NOT EXISTS lånte_bøker (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        bruker_id INTEGER,
+        bok_id INTEGER,
+        dato_lånt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        dato_returnert TIMESTAMP,
+        FOREIGN KEY (bruker_id) REFERENCES låntakere(nummer),
+        FOREIGN KEY (bok_id) REFERENCES bøker(bok_id)
+    );
+""")
+con.commit()
 con.commit()
 brukere = [
     ("1000","Tobias", "Gamme"),
